@@ -1,10 +1,11 @@
+import React from 'react';
+import GameConfigView from "./components/views/GameConfigView";
+import StoreProvider from './store';
 
-function App() {
-  return (
-    <div>
-      Frontend Juego Carros
-    </div>
-  );
-}
+const App = () => (
+  <StoreProvider>
+    <GameConfigView />
+  </StoreProvider>
+);
 
 export default App;
