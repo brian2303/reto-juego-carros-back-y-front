@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
+import TYPES from '../../actions/config-game.actions';
 import { Store } from '../../store';
 const HOST_API = 'http://localhost:8080/api/v1'
 
@@ -10,7 +11,7 @@ const ModalNewDriver = () => {
     const [modelCar, setModelCar] = useState('');
     const [numberLane, setNumberLane] = useState('');
 
-    const addPlayer = (e) => {
+    const addDriver = (e) => {
         e.preventDefault()
         const request = { name, brandCar, modelCar, numberLane }
         fetch(`${HOST_API}/config/new/driver`, {
@@ -21,7 +22,7 @@ const ModalNewDriver = () => {
             },
         })
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => dispatch({ type: TYPES.ADD_DRIVER, payload: response }))
     }
 
 
@@ -44,7 +45,7 @@ const ModalNewDriver = () => {
                                 <input type="text" onChange={(e) => setNumberLane(e.target.value)} placeholder="Numero de carril..." />
                             </div>
                             <div className="modal-footer">
-                                <button type="button" onClick={addPlayer} data-bs-dismiss="modal" className="btn btn-outline-primary">Registrar</button>
+                                <button type="button" onClick={addDriver} data-bs-dismiss="modal" className="btn btn-outline-primary">Registrar</button>
                             </div>
                         </div>
                     </div>

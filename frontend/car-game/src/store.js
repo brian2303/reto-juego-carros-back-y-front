@@ -7,7 +7,9 @@ const initialState = {
         drivers: [],
     },
     gameConfig: {
-        quantityPlayers: 0
+        quantityPlayers: 0,
+        trackId: null,
+        players: [],
     }
 };
 
