@@ -3,7 +3,11 @@ import reducer from './reducers/reducer';
 
 const initialState = {
     initialConfig: {
-        tracks: []
+        tracks: [],
+        drivers: [],
+    },
+    gameConfig: {
+        quantityPlayers: 0
     }
 };
 

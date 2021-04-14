@@ -1,4 +1,4 @@
-package co.com.sofka.cargame.dto;
+package co.com.sofka.cargame.dto.gameconfig;
 
 public class TrackDTO {
     private Long id;
