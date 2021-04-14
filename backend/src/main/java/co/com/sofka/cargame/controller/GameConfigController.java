@@ -1,6 +1,8 @@
 package co.com.sofka.cargame.controller;
 
 import co.com.sofka.cargame.dto.gameconfig.DriverConfigDTO;
+import co.com.sofka.cargame.dto.gameconfig.GameConfigDTO;
+import co.com.sofka.cargame.dto.gameconfig.GameDTO;
 import co.com.sofka.cargame.dto.gameconfig.TrackDTO;
 import co.com.sofka.cargame.service.GameConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,14 @@ public class GameConfigController {
     @Autowired
     GameConfigService gameConfigService;
 
-    @PostMapping
+    @PostMapping("/new/track")
     public ResponseEntity<TrackDTO> saveTrack(@RequestBody TrackDTO trackDTO){
         return new ResponseEntity(gameConfigService.saveTrack(trackDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/new/game")
+    public ResponseEntity<GameDTO> saveGame(@RequestBody GameConfigDTO gameConfigDTO){
+        return new ResponseEntity(gameConfigService.saveGame(gameConfigDTO),HttpStatus.CREATED);
     }
 
     @GetMapping("/tracks")

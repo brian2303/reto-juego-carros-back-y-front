@@ -32,6 +32,8 @@ public class DriverConfigMapper {
         toDriverConfigDTO.setBrandCar(driver.getCar().getBrand());
         toDriverConfigDTO.setModelCar(driver.getCar().getModel());
         toDriverConfigDTO.setNumberLane(driver.getCar().getLane().getNumberLane());
+        toDriverConfigDTO.setLastPodium(driver.getLastPodium());
+        toDriverConfigDTO.setTimesWon(driver.getTimesWon());
         return toDriverConfigDTO;
     }
 

@@ -1,20 +1,18 @@
 package co.com.sofka.cargame.service;
 
 import co.com.sofka.cargame.dto.gameconfig.DriverConfigDTO;
+import co.com.sofka.cargame.dto.gameconfig.GameConfigDTO;
+import co.com.sofka.cargame.dto.gameconfig.GameDTO;
 import co.com.sofka.cargame.dto.gameconfig.TrackDTO;
-import co.com.sofka.cargame.entity.Car;
-import co.com.sofka.cargame.entity.Driver;
-import co.com.sofka.cargame.entity.Lane;
-import co.com.sofka.cargame.entity.Track;
+import co.com.sofka.cargame.entity.*;
 import co.com.sofka.cargame.mapper.gameconfig.DriverConfigMapper;
+import co.com.sofka.cargame.mapper.gameconfig.GameConfigMapper;
 import co.com.sofka.cargame.mapper.gameconfig.TrackMapper;
-import co.com.sofka.cargame.repository.CarRepository;
-import co.com.sofka.cargame.repository.DriverRepository;
-import co.com.sofka.cargame.repository.LaneRepository;
-import co.com.sofka.cargame.repository.TrackRepository;
+import co.com.sofka.cargame.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,6 +29,9 @@ public class GameConfigService {
 
     @Autowired
     private DriverRepository driverRepository;
+
+    @Autowired
+    private GameRepository gameRepository;
 
 
     public TrackDTO saveTrack(TrackDTO trackDTO){
@@ -60,5 +61,27 @@ public class GameConfigService {
     public List<DriverConfigDTO> findAllDrivers() {
         List<Driver> driverList = (List<Driver>) driverRepository.findAll();
         return DriverConfigMapper.toListDriverConfigDTO(driverList);
+    }
+
+    public GameDTO saveGame(GameConfigDTO gameConfigDTO) {
+
+        Game game = new Game();
+        game.setName(gameConfigDTO.getGameName());
+        Track track = trackRepository.findById(gameConfigDTO.getTrackId())
+                .orElseThrow(() -> new RuntimeException("Track not found"));
+        List<Driver> driverList = findDriversById(gameConfigDTO.getDrivers());
+        game.setTrack(track);
+        game.setDrivers(driverList);
+        return GameConfigMapper.toGameDTO(gameRepository.save(game));
+    }
+
+    private List<Driver> findDriversById(List<Long> driversListId){
+        List<Driver> driverList = new ArrayList();
+        for (Long idDriver: driversListId) {
+            Driver driver = driverRepository.findById(idDriver)
+                    .orElseThrow(()-> new RuntimeException("Error searching driver"));
+            driverList.add(driver);
+        }
+        return driverList;
     }
 }
