@@ -30,6 +30,11 @@ public class GameConfigController {
         return new ResponseEntity(gameConfigService.saveGame(gameConfigDTO),HttpStatus.CREATED);
     }
 
+    @GetMapping("/games")
+    public ResponseEntity<GameDTO> getGames(){
+        return new ResponseEntity(gameConfigService.findAllGames(),HttpStatus.OK);
+    }
+
     @GetMapping("/tracks")
     public ResponseEntity<List<TrackDTO>> getTracks(){
         return new ResponseEntity(gameConfigService.findAllTracks(),HttpStatus.OK);

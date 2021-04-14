@@ -12,7 +12,6 @@ const ListPlayers = () => {
             const findedPlayer = drivers.find(driver => driver.id === driverGame);
             setplayersList(playersList.concat(findedPlayer))
         });
-        console.log(playersList)
     }, [driversGame]);
 
 

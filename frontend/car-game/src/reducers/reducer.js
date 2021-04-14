@@ -8,11 +8,13 @@ const reducer = (state, action) => {
         case TYPES.ADD_TRACK:
             const listWithNewTrack = [...state.initialConfig.tracks, action.payload];
             return { ...state, initialConfig: { ...state.initialConfig, tracks: listWithNewTrack } }
+        case TYPES.UPDATE_DRIVERS:
+            return { ...state, initialConfig: { ...state.initialConfig, drivers: action.payload } }
         case TYPES.ADD_DRIVER:
             const listWithNewDriver = [...state.initialConfig.drivers, action.payload]
             return { ...state, initialConfig: { ...state.initialConfig, drivers: listWithNewDriver } }
-        case TYPES.UPDATE_DRIVERS:
-            return { ...state, initialConfig: { ...state.initialConfig, drivers: action.payload } }
+        case TYPES.UPDATE_GAMES:
+            return { ...state, gameList: action.payload }
         case TYPES.SET_PLAYERS:
             return { ...state, gameConfig: { ...state.gameConfig, quantityPlayers: parseInt(action.payload) } }
         case TYPES.SET_NAME:

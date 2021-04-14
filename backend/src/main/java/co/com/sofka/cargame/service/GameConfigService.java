@@ -44,6 +44,11 @@ public class GameConfigService {
         return TrackMapper.toTrackDTOs(trackList);
     }
 
+    public List<GameDTO> findAllGames(){
+        List<Game> gameList = (List<Game>) gameRepository.findAll();
+        return GameConfigMapper.toListGameDTO(gameList);
+    }
+
     public DriverConfigDTO saveDriver(DriverConfigDTO driverConfigDTO) {
 
         Lane lane = laneRepository.save(DriverConfigMapper.toLane(driverConfigDTO));
