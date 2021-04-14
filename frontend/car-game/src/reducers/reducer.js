@@ -15,10 +15,12 @@ const reducer = (state, action) => {
             return { ...state, initialConfig: { ...state.initialConfig, drivers: action.payload } }
         case TYPES.SET_PLAYERS:
             return { ...state, gameConfig: { ...state.gameConfig, quantityPlayers: parseInt(action.payload) } }
+        case TYPES.SET_NAME:
+            return { ...state, gameConfig: { ...state.gameConfig, gameName: action.payload } }
         case TYPES.SET_TRACK:
             return { ...state, gameConfig: { ...state.gameConfig, trackId: parseInt(action.payload) } }
         case TYPES.ADD_PLAYER_TO_GAME:
-            return { ...state, gameConfig: { ...state.gameConfig, players: [...state.gameConfig.players, action.payload] } }
+            return { ...state, gameConfig: { ...state.gameConfig, drivers: [...state.gameConfig.drivers, action.payload] } }
         default:
             return state;
     }

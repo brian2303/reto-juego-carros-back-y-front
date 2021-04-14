@@ -18,7 +18,7 @@ const ModalNewTrack = () => {
       kms
     }
 
-    fetch(`${HOST_API}/config`, {
+    fetch(`${HOST_API}/config/new/track`, {
       method: 'POST',
       body: JSON.stringify(request),
       headers: {

@@ -33,6 +33,20 @@ const FormConfigGame = () => {
       })
   }
 
+  const handleAddGame = (e) => {
+    e.preventDefault()
+    const request = state.gameConfig;
+    fetch(`${HOST_API}/config/new/game`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(request)
+    })
+      .then(response => response.json())
+      .then(response => console.log(response))
+  }
+
 
   return (
     <div>
@@ -63,12 +77,18 @@ const FormConfigGame = () => {
               {drivers.map(driver => <option value={driver.id} key={driver.id}>{driver.name}</option>)}
             </select>
           </div>
-          <div className="col-2">
+          <div className="col-2" style={{ width: 50 }}>
             <ModalNewDriver />
+          </div>
+          <div className="col-3">
+            <input type="text"
+              onChange={(e) => dispatch({ type: TYPES.SET_NAME, payload: e.target.value })}
+              className="form-control"
+              placeholder="Asigne un nombre al juego..." />
           </div>
         </div>
         <ListPlayers />
-        <button type="submit" className="btn btn-outline-primary mt-2">Crear Juego</button>
+        <button type="submit" onClick={handleAddGame} className="btn btn-outline-primary mt-2">Crear Juego</button>
       </form>
     </div>
   )

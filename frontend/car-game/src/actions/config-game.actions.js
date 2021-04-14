@@ -6,6 +6,7 @@ const TYPES = {
     UPDATE_DRIVERS: 'update-drivers',
     ADD_DRIVER: 'add-driver',
     ADD_PLAYER_TO_GAME: 'add-player-to-game',
+    SET_NAME: 'set-name'
 }
 
 export default TYPES;

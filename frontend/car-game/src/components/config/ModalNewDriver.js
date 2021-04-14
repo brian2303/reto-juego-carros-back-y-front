@@ -5,7 +5,7 @@ const HOST_API = 'http://localhost:8080/api/v1'
 
 const ModalNewDriver = () => {
     const { state, dispatch } = useContext(Store);
-    const formRef = useRef(null)
+    const formDriverRef = useRef(null)
     const [name, setName] = useState('')
     const [brandCar, setBrandCar] = useState('')
     const [modelCar, setModelCar] = useState('');
@@ -23,6 +23,7 @@ const ModalNewDriver = () => {
         })
             .then(response => response.json())
             .then(response => dispatch({ type: TYPES.ADD_DRIVER, payload: response }))
+        formDriverRef.current.reset();
     }
 
 
@@ -32,7 +33,7 @@ const ModalNewDriver = () => {
                 <i className="bi bi-plus-circle"></i>
             </button>
             <div className="modal fade" id="modal-new-driver" tabIndex="-1" aria-hidden="true">
-                <form ref={formRef}>
+                <form ref={formDriverRef}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">

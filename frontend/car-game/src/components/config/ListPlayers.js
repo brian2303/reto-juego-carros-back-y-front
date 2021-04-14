@@ -4,16 +4,16 @@ import { Store } from '../../store'
 const ListPlayers = () => {
     const { state, dispatch } = useContext(Store)
     const [playersList, setplayersList] = useState([]);
-    const players = state.gameConfig.players;
+    const driversGame = state.gameConfig.drivers;
     const drivers = state.initialConfig.drivers;
 
     useEffect(() => {
-        players.forEach(player => {
-            const findedPlayer = drivers.find(driver => driver.id === player);
+        driversGame.forEach(driverGame => {
+            const findedPlayer = drivers.find(driver => driver.id === driverGame);
             setplayersList(playersList.concat(findedPlayer))
         });
         console.log(playersList)
-    }, [players]);
+    }, [driversGame]);
 
 
     return (

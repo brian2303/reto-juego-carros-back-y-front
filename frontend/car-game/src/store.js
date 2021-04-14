@@ -7,10 +7,12 @@ const initialState = {
         drivers: [],
     },
     gameConfig: {
-        quantityPlayers: 0,
-        trackId: null,
-        players: [],
-    }
+        gameName: null,
+        quantityPlayers: null,
+        trackId: 0,
+        drivers: [],
+    },
+    gameList: []
 };
 
 export const Store = createContext(initialState)
