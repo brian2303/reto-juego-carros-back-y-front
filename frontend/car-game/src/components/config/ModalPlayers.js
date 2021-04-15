@@ -1,5 +1,4 @@
 import React from 'react'
-import ModalNewDriver from './ModalNewDriver'
 
 const ModalPlayers = ({ players, gameId }) => {
   return (

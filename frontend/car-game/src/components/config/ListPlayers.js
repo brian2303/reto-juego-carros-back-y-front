@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Store } from '../../store'
+import { StoreConfig } from '../../store/config.store'
 
 const ListPlayers = () => {
-    const { state, dispatch } = useContext(Store)
+    const { state, dispatch } = useContext(StoreConfig)
     const [playersList, setplayersList] = useState([]);
     const driversGame = state.gameConfig.drivers;
     const drivers = state.initialConfig.drivers;

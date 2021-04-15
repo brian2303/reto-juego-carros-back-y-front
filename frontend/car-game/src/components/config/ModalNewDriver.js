@@ -1,10 +1,10 @@
 import React, { useContext, useRef, useState } from 'react'
 import TYPES from '../../actions/config-game.actions';
-import { Store } from '../../store';
+import { StoreConfig } from '../../store/config.store';
 const HOST_API = 'http://localhost:8080/api/v1'
 
 const ModalNewDriver = () => {
-    const { state, dispatch } = useContext(Store);
+    const { state, dispatch } = useContext(StoreConfig);
     const formDriverRef = useRef(null)
     const [name, setName] = useState('')
     const [brandCar, setBrandCar] = useState('')

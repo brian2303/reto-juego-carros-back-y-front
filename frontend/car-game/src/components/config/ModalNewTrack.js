@@ -1,11 +1,11 @@
 import React, { useContext, useRef, useState } from 'react'
-import { Store } from '../../store';
+import { StoreConfig } from '../../store/config.store';
 import TYPES from '../../actions/config-game.actions';
 
 const HOST_API = 'http://localhost:8080/api/v1'
 
 const ModalNewTrack = () => {
-  const { state, dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(StoreConfig);
   const [name, setName] = useState('')
   const [kms, setKms] = useState('')
   const formRef = useRef(null)

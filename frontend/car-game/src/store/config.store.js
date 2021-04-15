@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import reducer from './reducers/reducer';
+import reducer from '../reducers/reducer';
 
 const initialState = {
     initialConfig: {
@@ -15,15 +15,15 @@ const initialState = {
     gameList: []
 };
 
-export const Store = createContext(initialState)
+export const StoreConfig = createContext(initialState)
 
-const StoreProvider = ({ children }) => {
+const ConfigProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
-        <Store.Provider value={{ state, dispatch }}>
+        <StoreConfig.Provider value={{ state, dispatch }}>
             {children}
-        </Store.Provider>
+        </StoreConfig.Provider>
     )
 }
 
-export default StoreProvider;
+export default ConfigProvider;

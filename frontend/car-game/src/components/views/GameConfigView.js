@@ -1,6 +1,7 @@
 import React from 'react';
 import FormConfigGame from '../config/FormConfigGame';
 import ListGame from '../config/ListGame';
+import GameStartView from './GameStartView';
 
 const GameConfigView = () => {
     return (
@@ -15,6 +16,9 @@ const GameConfigView = () => {
             <hr />
             <div className="row m-2">
                 <ListGame />
+                <div className="col-6">
+                    <GameStartView />
+                </div>
             </div>
         </>
     )

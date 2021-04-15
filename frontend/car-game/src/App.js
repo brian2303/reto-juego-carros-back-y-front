@@ -1,11 +1,15 @@
 import React from 'react';
 import GameConfigView from "./components/views/GameConfigView";
-import StoreProvider from './store';
+import ConfigProvider from './store/config.store';
+import GameStartProvider from './store/game-start.store';
+
 
 const App = () => (
-  <StoreProvider>
-    <GameConfigView />
-  </StoreProvider>
+  <ConfigProvider>
+    <GameStartProvider>
+      <GameConfigView />
+    </GameStartProvider>
+  </ConfigProvider>
 );
 
 export default App;

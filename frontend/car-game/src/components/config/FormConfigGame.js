@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Store } from '../../store';
+import { StoreConfig } from '../../store/config.store';
 import ModalNewTrack from './ModalNewTrack'
 import TYPES from '../../actions/config-game.actions';
 import ModalNewDriver from './ModalNewDriver';
@@ -8,7 +8,7 @@ import ListPlayers from './ListPlayers';
 const HOST_API = 'http://localhost:8080/api/v1'
 
 const FormConfigGame = () => {
-  const { state, dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(StoreConfig);
   const { tracks, drivers } = state.initialConfig
 
 
