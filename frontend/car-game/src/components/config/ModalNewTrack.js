@@ -46,8 +46,8 @@ const ModalNewTrack = () => {
                 <h5 className="modal-title" id="exampleModalLabel">Agregar pista 🛣</h5>
               </div>
               <div className="modal-body">
-                <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre de la pista" />
-                <input type="text" onChange={(e) => setKms(e.target.value)} placeholder="Longitud en kms..." />
+                <input type="text" className="form-control mb-1" onChange={(e) => setName(e.target.value)} placeholder="Nombre de la pista" />
+                <input type="number" className="form-control mb-1" onChange={(e) => setKms(e.target.value)} placeholder="Longitud en kms..." />
               </div>
               <div className="modal-footer">
                 <button type="button" onClick={addTrack} data-bs-dismiss="modal" className="btn btn-outline-primary">Registrar</button>

@@ -3,7 +3,7 @@ import gameStartReducer from '../reducers/game-start.reducer';
 
 const initialState = {
     listPlayersInGame: [],
-    kmsTrack: null,
+    kmsTrack: 0,
     podium: []
 };
 

@@ -3,13 +3,15 @@ import TYPES_GAME from '../../actions/game-start.actions'
 import { GameStart } from '../../store/game-start.store'
 import ModalPodium from './ModalPodium'
 
-const HOST_API = 'http://localhost:8080/api/v1'
+const HOST_API = 'http://localhost:8080/api/v1';
+
 
 const TrackGame = () => {
   const MINIMUN_PLAYERS = 0;
   const { stateGame, dispatchGame } = useContext(GameStart)
   const playersInGame = stateGame.listPlayersInGame;
   const kmsTrack = stateGame.kmsTrack;
+  const kmsTrackInMeters = kmsTrack * 1000;
 
   useEffect(() => {
     if (playersInGame.length > MINIMUN_PLAYERS) {
@@ -27,6 +29,9 @@ const TrackGame = () => {
     }
   }, [playersInGame]);
 
+  const backGroundWinner = {
+    color: 'green',
+  }
 
 
   return (
@@ -48,7 +53,8 @@ const TrackGame = () => {
               <td>{player.name}</td>
               <td>{player.brandCar}</td>
               <td>{player.modelCar}</td>
-              <td>puntos :  {!player.score ? 0 : player.score}</td>
+              <td style={player.score > kmsTrackInMeters ? backGroundWinner : {}} >
+                puntos :  {!player.score ? 0 : player.score}</td>
             </tr>
           ))}
         </tbody>

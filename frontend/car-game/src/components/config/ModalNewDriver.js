@@ -40,10 +40,10 @@ const ModalNewDriver = () => {
                                 <h5 className="modal-title" id="exampleModalLabel">Agregar conductor 🛣</h5>
                             </div>
                             <div className="modal-body">
-                                <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre de el conductor..." />
-                                <input type="text" onChange={(e) => setBrandCar(e.target.value)} placeholder="Marca del vehiculo..." />
-                                <input type="text" onChange={(e) => setModelCar(e.target.value)} placeholder="Modelo del vehiculo..." />
-                                <input type="text" onChange={(e) => setNumberLane(e.target.value)} placeholder="Numero de carril..." />
+                                <input className="form-control mb-1" type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre de el conductor..." />
+                                <input className="form-control mb-1" type="text" onChange={(e) => setBrandCar(e.target.value)} placeholder="Marca del vehiculo..." />
+                                <input className="form-control mb-1" type="number" onChange={(e) => setModelCar(e.target.value)} placeholder="Modelo ej: 2015" />
+                                <input className="form-control mb-1" type="number" onChange={(e) => setNumberLane(e.target.value)} placeholder="carril ej: 1" />
                             </div>
                             <div className="modal-footer">
                                 <button type="button" onClick={addDriver} data-bs-dismiss="modal" className="btn btn-outline-primary">Registrar</button>
