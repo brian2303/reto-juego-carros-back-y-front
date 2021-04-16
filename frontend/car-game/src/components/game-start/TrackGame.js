@@ -3,6 +3,7 @@ import TYPES_GAME from '../../actions/game-start.actions'
 import { GameStart } from '../../store/game-start.store'
 import ModalPodium from './ModalPodium'
 import WinnersLastGame from './WinnersLastGame';
+import swal from 'sweetalert';
 
 const HOST_API = 'http://localhost:8080/api/v1';
 
@@ -25,6 +26,7 @@ const TrackGame = () => {
         .then(response => {
           if (response.finished) {
             dispatchGame({ type: TYPES_GAME.SHOW_WINNERS, payload: response.driversInGame })
+            swal({ title: "Juego terminado", text: "Gracias por jugar", icon: "success", button: "Aceptar" })
           } else {
             dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: { players: response.driversInGame, kmsTrack: response.kmsTrack } })
           }
