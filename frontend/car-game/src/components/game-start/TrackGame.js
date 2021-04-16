@@ -9,28 +9,19 @@ const TrackGame = () => {
   const playersInGame = stateGame.listPlayersInGame;
 
   useEffect(() => {
-    let interval;
     if (playersInGame.length > 0) {
-      interval = setInterval(() => {
-        console.log("EJECUTADO")
-        fetch(`${HOST_API}/game/start`, {
-          method: 'POST',
-          body: JSON.stringify({ driversInGame: playersInGame, isFinished: false }),
-          headers: { 'Content-type': 'application/json' }
+      fetch(`${HOST_API}/game/start`, {
+        method: 'POST',
+        body: JSON.stringify({ driversInGame: playersInGame, isFinished: false }),
+        headers: { 'Content-type': 'application/json' }
+      })
+        .then(response => response.json())
+        .then(response => {
+          if (!response.finished) {
+            dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: response.driversInGame })
+          }
         })
-          .then(response => response.json())
-          .then(response => {
-            if (response.finished) {
-              clearInterval(interval)
-            } else {
-              dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: response.driversInGame })
-            }
-          })
-      }, 2000)
     }
-    return () => {
-      clearInterval(interval)
-    };
   }, [playersInGame]);
 
 
