@@ -12,7 +12,6 @@ const TrackGame = () => {
 
   useEffect(() => {
     if (playersInGame.length > MINIMUN_PLAYERS) {
-      debugger;
       fetch(`${HOST_API}/game/start`, {
         method: 'POST',
         body: JSON.stringify({ driversInGame: playersInGame, isFinished: false, kmsTrack }),
@@ -20,7 +19,6 @@ const TrackGame = () => {
       })
         .then(response => response.json())
         .then(response => {
-          debugger;
           if (!response.finished) {
             dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: { players: response.driversInGame, kmsTrack: response.kmsTrack } })
           }

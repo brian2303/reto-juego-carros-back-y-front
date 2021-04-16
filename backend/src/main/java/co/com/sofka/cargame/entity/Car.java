@@ -12,7 +12,7 @@ public class Car {
     private Long id;
     private String brand;
     private String model;
-    private Integer score;
+    private Integer score = 0;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lane_id", referencedColumnName = "id")
@@ -22,9 +22,11 @@ public class Car {
     public Integer getScore() {
         return score;
     }
+
     public void setScore(Integer score) {
         this.score = score;
     }
+
     public Long getId() {
         return id;
     }

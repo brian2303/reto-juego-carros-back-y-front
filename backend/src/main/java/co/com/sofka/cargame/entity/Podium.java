@@ -18,6 +18,15 @@ public class Podium {
     private Integer wonTimes;
 
 
+    public Podium(String name, Integer position, Integer wonTimes) {
+        this.name = name;
+        this.position = position;
+        this.wonTimes = wonTimes;
+    }
+
+    public Podium() {
+    }
+
     public Integer getPosition() {
         return position;
     }

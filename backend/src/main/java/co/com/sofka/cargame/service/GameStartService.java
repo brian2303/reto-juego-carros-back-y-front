@@ -3,9 +3,11 @@ package co.com.sofka.cargame.service;
 import co.com.sofka.cargame.dto.gameconfig.DriverConfigDTO;
 import co.com.sofka.cargame.dto.gamestart.DriversInGameDTO;
 import co.com.sofka.cargame.entity.Driver;
+import co.com.sofka.cargame.entity.Podium;
 import co.com.sofka.cargame.mapper.gameconfig.DriverConfigMapper;
 import co.com.sofka.cargame.mapper.gameconfig.GameConfigMapper;
 import co.com.sofka.cargame.repository.DriverRepository;
+import co.com.sofka.cargame.repository.PodiumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,40 +22,29 @@ public class GameStartService {
     @Autowired
     private DriverRepository driverRepository;
 
+    @Autowired
+    private PodiumRepository podiumRepository;
+
     public DriversInGameDTO startGame(DriversInGameDTO game){
         List<Driver> winners = new ArrayList();
 
         for (DriverConfigDTO driver: game.getDriversInGame()) {
-            Driver driverShift = driverRepository.findById(driver.getId())
-                    .orElseThrow(() -> new RuntimeException("Driver not found"));
+            Driver driverShift = this.findDriverShift(driver.getId());
+            Integer scorePrevious = driverShift.getCar().getScore();
 
-            Integer score = driverShift.getCar().getScore();
-            if (score == null) score = 0;
-
-            driverShift.getCar().setScore(score  + GameStartService.rollDice());
+            driverShift.getCar().setScore(GameStartService.rollDice(scorePrevious));
             Driver driverWithScoreUpdated = driverRepository.save(driverShift);
 
-
-            if (driverWithScoreUpdated.getCar().getScore() >= convertTrackToMeters(game.getKmsTrack()) ){
+            Integer newScore = driverWithScoreUpdated.getCar().getScore();
+            if (newScore >= convertTrackToMeters(game.getKmsTrack())){
                 winners.add(driverWithScoreUpdated);
                 if(winners.size() == 3){
-                    DriversInGameDTO gameFinished = new DriversInGameDTO();
-                    List<DriverConfigDTO> winnersConfigDTO  = winners.stream()
-                            .map(DriverConfigMapper::toDriverConfigDTO)
-                            .collect(Collectors.toList());
-                    gameFinished.setDriversInGame(winnersConfigDTO);
-                    gameFinished.setFinished(true);
-
-                    game.getDriversInGame().stream().forEach(d -> {
-                        Driver driverToUpdateScore = driverRepository.findById(d.getId()).get();
-                        driverToUpdateScore.getCar().setScore(0);
-                        driverRepository.save(driverToUpdateScore);
-                    });
-
-                    return gameFinished;
+                    savePodium(winners);
+                    resetScores(game);
+                    game.setFinished(true);
+                    return game;
                 }
             }
-
         }
         List<DriverConfigDTO> driverConfigDTOS = new ArrayList();
         game.getDriversInGame().stream().forEach(d ->{
@@ -66,17 +57,35 @@ public class GameStartService {
         return game;
     }
 
+    private void savePodium(List<Driver> winners){
+
+        winners.forEach((winner) -> {
+            Podium podiumDriver = podiumRepository.findById(winner.getName())
+                    .orElse(podiumRepository.save(new Podium(winner.getName(),0,0)));
+            podiumDriver.setWonTimes(podiumDriver.getWonTimes() + 1);
+            podiumRepository.save(podiumDriver);
+        });
+    }
+
+    private void resetScores(DriversInGameDTO game){
+        game.getDriversInGame().stream().forEach(d -> {
+            Driver driverToUpdateScore = driverRepository.findById(d.getId()).get();
+            driverToUpdateScore.getCar().setScore(0);
+            driverRepository.save(driverToUpdateScore);
+        });
+    }
+
+    private Driver findDriverShift(Long id){
+        return driverRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+    }
+
     private static Integer convertTrackToMeters(Integer kmsTrack){
         return kmsTrack * 1000;
     }
 
-    private static int rollDice(){
-        return (int)(Math.random() * 6 + 1) * 100;
-    }
-
-
-    private Boolean carHasScore(DriverConfigDTO car){
-        return car.getScore() != null;
+    private static int rollDice(Integer previousScore){
+        return ((int)(Math.random() * 6 + 1) * 100) + previousScore;
     }
 
 }
