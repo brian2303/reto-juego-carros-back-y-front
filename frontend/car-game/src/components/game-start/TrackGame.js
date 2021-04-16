@@ -23,10 +23,10 @@ const TrackGame = () => {
       })
         .then(response => response.json())
         .then(response => {
-          if (!response.finished) {
-            dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: { players: response.driversInGame, kmsTrack: response.kmsTrack } })
-          } else {
+          if (response.finished) {
             dispatchGame({ type: TYPES_GAME.SHOW_WINNERS, payload: response.driversInGame })
+          } else {
+            dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: { players: response.driversInGame, kmsTrack: response.kmsTrack } })
           }
         })
     }

@@ -34,10 +34,10 @@ const ModalPodium = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {stateGame.podium.map(p => (
+                  {stateGame.podium.map((pod) => (
                     <tr>
-                      <th scope="row">{p.name}</th>
-                      <td>{p.wonTimes}</td>
+                      <th scope="row">{pod.name}</th>
+                      <td>{pod.wonTimes}</td>
                     </tr>
                   ))}
                 </tbody>

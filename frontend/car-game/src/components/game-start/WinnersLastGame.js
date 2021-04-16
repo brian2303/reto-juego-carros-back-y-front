@@ -19,14 +19,16 @@ const WinnersLastGame = () => {
               <table className="table">
                 <thead>
                   <tr>
+                    <th scope="col">Posicion</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Marca de carro</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {stateGame.winners.map(winner => (
+                  {stateGame.winners.map((winner, idx) => (
                     <tr>
-                      <th scope="row">{winner.name}</th>
+                      <th scope="row">{idx + 1}</th>
+                      <th>{winner.name}</th>
                       <td>{winner.brandCar}</td>
                     </tr>
                   ))}
