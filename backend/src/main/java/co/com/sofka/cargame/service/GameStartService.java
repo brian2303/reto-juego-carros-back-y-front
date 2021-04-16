@@ -33,6 +33,7 @@ public class GameStartService {
             Driver driverWithScoreUpdated = driverRepository.save(driverShift);
 
             Integer newScore = driverWithScoreUpdated.getCar().getScore();
+            driver.setScore(newScore);
             if (newScore >= convertTrackToMeters(game.getKmsTrack())){
                 winners.add(driverWithScoreUpdated);
                 if(winners.size() == 3){
@@ -43,14 +44,6 @@ public class GameStartService {
                 }
             }
         }
-        List<DriverConfigDTO> driverConfigDTOS = new ArrayList();
-        game.getDriversInGame().stream().forEach(d ->{
-            Driver driver = driverRepository.findById(d.getId()).get();
-            DriverConfigDTO driverConfigDTO = DriverConfigMapper.toDriverConfigDTO(driver);
-            driverConfigDTOS.add(driverConfigDTO);
-        });
-        game.getDriversInGame().clear();
-        game.setDriversInGame(driverConfigDTOS);
         return game;
     }
 
