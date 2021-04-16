@@ -36,7 +36,7 @@ public class GameStartService {
 
             if (driverWithScoreUpdated.getCar().getScore() >= 2000){
                 winners.add(driverWithScoreUpdated);
-                if(winners.size() == 2){
+                if(winners.size() == 3){
                     DriversInGameDTO gameFinished = new DriversInGameDTO();
                     List<DriverConfigDTO> winnersConfigDTO  = winners.stream()
                             .map(DriverConfigMapper::toDriverConfigDTO)
@@ -55,6 +55,14 @@ public class GameStartService {
             }
 
         }
+        List<DriverConfigDTO> driverConfigDTOS = new ArrayList();
+        game.getDriversInGame().stream().forEach(d ->{
+            Driver driver = driverRepository.findById(d.getId()).get();
+            DriverConfigDTO driverConfigDTO = DriverConfigMapper.toDriverConfigDTO(driver);
+            driverConfigDTOS.add(driverConfigDTO);
+        });
+        game.getDriversInGame().clear();
+        game.setDriversInGame(driverConfigDTOS);
         return game;
     }
 

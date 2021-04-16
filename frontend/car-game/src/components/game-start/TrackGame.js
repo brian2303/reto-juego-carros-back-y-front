@@ -10,7 +10,6 @@ const TrackGame = () => {
 
   useEffect(() => {
     let interval;
-    debugger;
     if (playersInGame.length > 0) {
       interval = setInterval(() => {
         console.log("EJECUTADO")
@@ -24,7 +23,6 @@ const TrackGame = () => {
             if (response.finished) {
               clearInterval(interval)
             } else {
-              debugger;
               dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: response.driversInGame })
             }
           })
