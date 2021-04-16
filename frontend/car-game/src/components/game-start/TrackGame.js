@@ -5,11 +5,12 @@ import { GameStart } from '../../store/game-start.store'
 const HOST_API = 'http://localhost:8080/api/v1'
 
 const TrackGame = () => {
+  const MINIMUN_PLAYERS = 0;
   const { stateGame, dispatchGame } = useContext(GameStart)
   const playersInGame = stateGame.listPlayersInGame;
 
   useEffect(() => {
-    if (playersInGame.length > 0) {
+    if (playersInGame.length > MINIMUN_PLAYERS) {
       fetch(`${HOST_API}/game/start`, {
         method: 'POST',
         body: JSON.stringify({ driversInGame: playersInGame, isFinished: false }),
