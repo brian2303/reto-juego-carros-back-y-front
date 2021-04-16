@@ -3,7 +3,8 @@ import TYPES_GAME from '../actions/game-start.actions';
 const gameStartReducer = (state, action) => {
     switch (action.type) {
         case TYPES_GAME.UPDATE_PLAYERS:
-            return { ...state, listPlayersInGame: action.payload }
+            const { players, kmsTrack } = action.payload;
+            return { ...state, listPlayersInGame: players, kmsTrack: kmsTrack }
         default:
             return state
     }

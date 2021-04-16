@@ -34,7 +34,7 @@ public class GameStartService {
             Driver driverWithScoreUpdated = driverRepository.save(driverShift);
 
 
-            if (driverWithScoreUpdated.getCar().getScore() >= 2000){
+            if (driverWithScoreUpdated.getCar().getScore() >= convertTrackToMeters(game.getKmsTrack()) ){
                 winners.add(driverWithScoreUpdated);
                 if(winners.size() == 3){
                     DriversInGameDTO gameFinished = new DriversInGameDTO();
@@ -64,6 +64,10 @@ public class GameStartService {
         game.getDriversInGame().clear();
         game.setDriversInGame(driverConfigDTOS);
         return game;
+    }
+
+    private static Integer convertTrackToMeters(Integer kmsTrack){
+        return kmsTrack * 1000;
     }
 
     private static int rollDice(){

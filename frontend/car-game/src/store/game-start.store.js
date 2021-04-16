@@ -2,7 +2,8 @@ import React, { createContext, useReducer } from "react";
 import gameStartReducer from '../reducers/game-start.reducer';
 
 const initialState = {
-    listPlayersInGame: []
+    listPlayersInGame: [],
+    kmsTrack: null
 };
 
 export const GameStart = createContext(initialState)

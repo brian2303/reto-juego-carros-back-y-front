@@ -8,6 +8,15 @@ public class DriversInGameDTO {
 
     private List<DriverConfigDTO> driversInGame;
     private Boolean isFinished;
+    private Integer kmsTrack;
+
+    public Integer getKmsTrack() {
+        return kmsTrack;
+    }
+
+    public void setKmsTrack(Integer kmsTrack) {
+        this.kmsTrack = kmsTrack;
+    }
 
     public List<DriverConfigDTO> getDriversInGame() {
         return driversInGame;
