@@ -7,25 +7,15 @@ public class DriverConfigDTO {
     private String brandCar;
     private String modelCar;
     private Integer numberLane;
-    private Long lastPodium;
-    private Long timesWon;
+    private Integer score;
 
-    public Long getLastPodium() {
-        return lastPodium;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setLastPodium(Long lastPodium) {
-        this.lastPodium = lastPodium;
+    public void setScore(Integer score) {
+        this.score = score;
     }
-
-    public Long getTimesWon() {
-        return timesWon;
-    }
-
-    public void setTimesWon(Long timesWon) {
-        this.timesWon = timesWon;
-    }
-
     public Long getId() {
         return id;
     }

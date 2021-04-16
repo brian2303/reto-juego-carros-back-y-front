@@ -1,11 +1,9 @@
 package co.com.sofka.cargame.mapper.gameconfig;
 
 import co.com.sofka.cargame.dto.gameconfig.DriverConfigDTO;
-import co.com.sofka.cargame.dto.gameconfig.TrackDTO;
 import co.com.sofka.cargame.entity.Car;
 import co.com.sofka.cargame.entity.Driver;
 import co.com.sofka.cargame.entity.Lane;
-import co.com.sofka.cargame.entity.Track;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,9 +29,8 @@ public class DriverConfigMapper {
         toDriverConfigDTO.setName(driver.getName());
         toDriverConfigDTO.setBrandCar(driver.getCar().getBrand());
         toDriverConfigDTO.setModelCar(driver.getCar().getModel());
+        toDriverConfigDTO.setScore(driver.getCar().getScore());
         toDriverConfigDTO.setNumberLane(driver.getCar().getLane().getNumberLane());
-        toDriverConfigDTO.setLastPodium(driver.getLastPodium());
-        toDriverConfigDTO.setTimesWon(driver.getTimesWon());
         return toDriverConfigDTO;
     }
 
