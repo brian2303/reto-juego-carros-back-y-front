@@ -3,7 +3,8 @@ import gameStartReducer from '../reducers/game-start.reducer';
 
 const initialState = {
     listPlayersInGame: [],
-    kmsTrack: null
+    kmsTrack: null,
+    podium: []
 };
 
 export const GameStart = createContext(initialState)

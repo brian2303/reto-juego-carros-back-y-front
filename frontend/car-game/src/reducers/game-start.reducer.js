@@ -5,6 +5,8 @@ const gameStartReducer = (state, action) => {
         case TYPES_GAME.UPDATE_PLAYERS:
             const { players, kmsTrack } = action.payload;
             return { ...state, listPlayersInGame: players, kmsTrack: kmsTrack }
+        case TYPES_GAME.UPDATE_PODIUM:
+            return { ...state, podium: action.payload }
         default:
             return state
     }

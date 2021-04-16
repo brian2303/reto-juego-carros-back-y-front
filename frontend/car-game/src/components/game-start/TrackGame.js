@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import TYPES_GAME from '../../actions/game-start.actions'
 import { GameStart } from '../../store/game-start.store'
+import ModalPodium from './ModalPodium'
 
 const HOST_API = 'http://localhost:8080/api/v1'
 
@@ -36,7 +37,9 @@ const TrackGame = () => {
             <th scope="col"></th>
             <th scope="row">PISTA DE JUEGO</th>
             <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">
+              <ModalPodium />
+            </th>
           </tr>
         </thead>
         <tbody>

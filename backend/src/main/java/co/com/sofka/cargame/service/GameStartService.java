@@ -2,9 +2,11 @@ package co.com.sofka.cargame.service;
 
 import co.com.sofka.cargame.dto.gameconfig.DriverConfigDTO;
 import co.com.sofka.cargame.dto.gamestart.DriversInGameDTO;
+import co.com.sofka.cargame.dto.gamestart.PodiumDTO;
 import co.com.sofka.cargame.entity.Driver;
 import co.com.sofka.cargame.entity.Podium;
 import co.com.sofka.cargame.mapper.gameconfig.DriverConfigMapper;
+import co.com.sofka.cargame.mapper.gamestart.PodiumMapper;
 import co.com.sofka.cargame.repository.DriverRepository;
 import co.com.sofka.cargame.repository.PodiumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,13 @@ public class GameStartService {
 
     @Autowired
     private PodiumRepository podiumRepository;
+
+    public List<PodiumDTO> findAllPodiums() {
+        List<Podium> podiumList = (List<Podium>) podiumRepository.findAll();
+        return PodiumMapper.toListPodiumDTO(podiumList);
+    }
+
+
 
     public DriversInGameDTO startGame(DriversInGameDTO game){
         List<Driver> winners = new ArrayList();

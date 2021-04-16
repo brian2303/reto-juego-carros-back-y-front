@@ -2,6 +2,7 @@ package co.com.sofka.cargame.controller;
 
 import co.com.sofka.cargame.dto.gameconfig.DriverConfigDTO;
 import co.com.sofka.cargame.dto.gamestart.DriversInGameDTO;
+import co.com.sofka.cargame.dto.gamestart.PodiumDTO;
 import co.com.sofka.cargame.service.GameStartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,4 +21,10 @@ public class GameStartController {
     public DriversInGameDTO startGame(@RequestBody DriversInGameDTO driversInGame){
         return gameStartService.startGame(driversInGame);
     }
+
+    @GetMapping("/podium")
+    public List<PodiumDTO> findAllPodiums(){
+        return gameStartService.findAllPodiums();
+    }
+
 }
