@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import TYPES_GAME from '../../actions/game-start.actions'
 import { GameStart } from '../../store/game-start.store'
 import ModalPodium from './ModalPodium'
+import WinnersLastGame from './WinnersLastGame';
 
 const HOST_API = 'http://localhost:8080/api/v1';
 
@@ -24,6 +25,8 @@ const TrackGame = () => {
         .then(response => {
           if (!response.finished) {
             dispatchGame({ type: TYPES_GAME.UPDATE_PLAYERS, payload: { players: response.driversInGame, kmsTrack: response.kmsTrack } })
+          } else {
+            dispatchGame({ type: TYPES_GAME.SHOW_WINNERS, payload: response.driversInGame })
           }
         })
     }
@@ -39,11 +42,13 @@ const TrackGame = () => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col"></th>
-            <th scope="row">PISTA DE JUEGO</th>
-            <th scope="col"></th>
+            <th scope="col">PISTA DE JUEGO</th>
+            <th scope="row"></th>
             <th scope="col">
               <ModalPodium />
+            </th>
+            <th scope="col">
+              <WinnersLastGame />
             </th>
           </tr>
         </thead>
@@ -53,7 +58,7 @@ const TrackGame = () => {
               <td>{player.name}</td>
               <td>{player.brandCar}</td>
               <td>{player.modelCar}</td>
-              <td style={player.score > kmsTrackInMeters ? backGroundWinner : {}} >
+              <td style={player.score >= kmsTrackInMeters ? backGroundWinner : {}} >
                 puntos :  {!player.score ? 0 : player.score}</td>
             </tr>
           ))}

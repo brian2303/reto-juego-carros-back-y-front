@@ -16,7 +16,7 @@ const ModalPodium = () => {
   return (
     <>
       <button type="button" onClick={handlePodium} className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalPodium">
-        PODIOS
+        Podios generales
       </button>
       <div className="modal fade" id="modalPodium" tabindex="-1" aria-labelledby="modalPodium" aria-hidden="true">
         <div className="modal-dialog">

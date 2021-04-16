@@ -38,9 +38,11 @@ public class GameStartService {
             Driver driverShift = this.findDriverShift(driver.getId());
             Integer scorePrevious = driverShift.getCar().getScore();
 
-            driverShift.getCar().setScore(GameStartService.rollDice(scorePrevious));
-            Driver driverWithScoreUpdated = driverRepository.save(driverShift);
+            if (scorePrevious < convertTrackToMeters(game.getKmsTrack())){
+                driverShift.getCar().setScore(GameStartService.rollDice(scorePrevious));
+            }
 
+            Driver driverWithScoreUpdated = driverRepository.save(driverShift);
             Integer newScore = driverWithScoreUpdated.getCar().getScore();
             driver.setScore(newScore);
             if (newScore >= convertTrackToMeters(game.getKmsTrack())){
@@ -48,10 +50,13 @@ public class GameStartService {
                 if(winners.size() == 3){
                     savePodium(winners);
                     resetScores(game);
+                    game.getDriversInGame().clear();
+                    game.setDriversInGame(DriverConfigMapper.toListDriverConfigDTO(winners));
                     game.setFinished(true);
                     return game;
                 }
             }
+
         }
         return game;
     }
