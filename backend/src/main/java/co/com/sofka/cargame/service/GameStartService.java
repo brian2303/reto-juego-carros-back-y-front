@@ -5,7 +5,6 @@ import co.com.sofka.cargame.dto.gamestart.DriversInGameDTO;
 import co.com.sofka.cargame.entity.Driver;
 import co.com.sofka.cargame.entity.Podium;
 import co.com.sofka.cargame.mapper.gameconfig.DriverConfigMapper;
-import co.com.sofka.cargame.mapper.gameconfig.GameConfigMapper;
 import co.com.sofka.cargame.repository.DriverRepository;
 import co.com.sofka.cargame.repository.PodiumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class GameStartService {
@@ -61,7 +58,7 @@ public class GameStartService {
 
         winners.forEach((winner) -> {
             Podium podiumDriver = podiumRepository.findById(winner.getName())
-                    .orElse(podiumRepository.save(new Podium(winner.getName(),0,0)));
+                    .orElse(new Podium(winner.getName(),0,0));
             podiumDriver.setWonTimes(podiumDriver.getWonTimes() + 1);
             podiumRepository.save(podiumDriver);
         });
